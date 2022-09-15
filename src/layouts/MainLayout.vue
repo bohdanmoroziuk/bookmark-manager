@@ -15,22 +15,24 @@
     </q-header>
 
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
-      <q-item
-        v-for="link of links"
-        clickable
-        :key="link.title"
-        :to="link.to"
-        exact
-      >
-        <q-item-section avatar>
-          <q-icon :name="link.icon" />
-        </q-item-section>
+      <q-list>
+        <q-item
+          v-for="link of links"
+          clickable
+          :key="link.title"
+          :to="link.to"
+          exact
+        >
+          <q-item-section avatar>
+            <q-icon :name="link.icon" />
+          </q-item-section>
 
-        <q-item-section>
-          <q-item-label>{{ link.title }}</q-item-label>
-          <q-item-label caption>{{ link.caption }}</q-item-label>
-        </q-item-section>
-      </q-item>
+          <q-item-section>
+            <q-item-label>{{ link.title }}</q-item-label>
+            <q-item-label caption>{{ link.caption }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
     </q-drawer>
 
     <q-page-container>
