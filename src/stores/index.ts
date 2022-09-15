@@ -2,6 +2,8 @@ import { store } from 'quasar/wrappers';
 import { createPinia } from 'pinia';
 import { Router } from 'vue-router';
 
+export * from 'src/stores/bookmarks';
+
 /*
  * When adding new properties to stores, you should also
  * extend the `PiniaCustomProperties` interface.
