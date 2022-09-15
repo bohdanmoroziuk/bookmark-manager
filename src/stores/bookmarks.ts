@@ -1,22 +1,20 @@
+import { uid } from 'quasar';
 import { defineStore } from 'pinia';
 
-import { Bookmark } from 'src/types';
+import { Bookmark, BookmarkBody, BookmarkId } from 'src/types';
 
 export interface BookmarksStoreState {
   bookmarks: Bookmark[];
 }
 
+const createBookmark = (body: BookmarkBody): Bookmark => ({
+  id: uid(),
+  ...body,
+});
+
 export const useBookmarksStore = defineStore('bookmarks', {
   state: (): BookmarksStoreState => ({
-    bookmarks: [
-      {
-        id: '1',
-        title: 'React',
-        caption: 'A JavaScript library for building user interfaces',
-        image: 'https://i0.wp.com/www.primefaces.org/wp-content/uploads/2017/09/feature-react.png?ssl=1',
-        url: 'https://reactjs.org/',
-      },
-    ],
+    bookmarks: [],
   }),
   getters: {
     hasBookmarks(state: BookmarksStoreState) {
@@ -24,7 +22,19 @@ export const useBookmarksStore = defineStore('bookmarks', {
     },
   },
   actions: {
-    deleteBookmark(id: string) {
+    addBookmark(body: BookmarkBody) {
+      const bookmark = createBookmark(body);
+
+      this.bookmarks = [bookmark, ...this.bookmarks];
+    },
+    editBookmark(id: BookmarkId, updates: Partial<BookmarkBody>) {
+      this.bookmarks = this.bookmarks.map((bookmark) => (
+        bookmark.id === id
+          ? { ...bookmark, ...updates }
+          : bookmark
+      ));
+    },
+    deleteBookmark(id: BookmarkId) {
       this.bookmarks = this.bookmarks.filter((bookmark) => bookmark.id !== id);
     },
   },

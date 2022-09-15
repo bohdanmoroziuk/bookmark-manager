@@ -5,3 +5,7 @@ export interface Bookmark {
   url: string;
   image: string;
 }
+
+export type BookmarkId = Bookmark['id'];
+
+export type BookmarkBody = Omit<Bookmark, 'id'>;
