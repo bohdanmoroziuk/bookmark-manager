@@ -3,29 +3,35 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/MainLayout.vue'),
     children: [
       {
         path: '',
-        name: 'home',
-        component: () => import('pages/IndexPage.vue'),
+        name: 'all-bookmarks',
+        component: () => import('src/pages/AllBookmarksPage.vue'),
       },
       {
         path: 'new',
-        name: 'new',
+        name: 'new-bookmark',
         component: () => import('src/pages/NewBookmarkPage.vue'),
       },
       {
-        path: 'trash',
-        name: 'trash',
-        component: () => import('pages/TrashPage.vue'),
+        path: 'bin',
+        name: 'bookmarks-bin',
+        component: () => import('src/pages/BookmarksBinPage.vue'),
+      },
+      {
+        path: '/:catchAll(.*)*',
+        redirect: {
+          name: '404',
+        },
       },
     ],
   },
   {
     path: '/404',
     name: '404',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('src/pages/ErrorNotFound.vue'),
   },
   {
     path: '/:catchAll(.*)*',

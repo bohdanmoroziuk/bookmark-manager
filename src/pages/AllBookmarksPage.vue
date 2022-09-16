@@ -13,7 +13,7 @@
         </template>
       </q-input>
       <q-btn
-        :to="{ name: 'new' }"
+        :to="{ name: 'new-bookmark' }"
         color="primary"
         icon="add"
         label="Add"

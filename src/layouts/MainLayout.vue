@@ -29,7 +29,7 @@
 
           <q-item-section>
             <q-item-label>{{ link.title }}</q-item-label>
-            <q-item-label caption>{{ link.caption }}</q-item-label>
+            <q-item-label caption v-if="link.caption">{{ link.caption }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -55,19 +55,27 @@ const toggleLeftDrawer = () => {
 
 const links = [
   {
-    title: 'Bookmarks',
-    caption: 'Manage your bookmarks here',
+    title: 'All bookmarks',
+    caption: '',
     icon: 'bookmarks',
     to: {
-      name: 'home',
+      name: 'all-bookmarks',
     },
   },
   {
-    title: 'Trash',
+    title: 'New bookmark',
+    caption: '',
+    icon: 'bookmark_add',
+    to: {
+      name: 'new-bookmark',
+    },
+  },
+  {
+    title: 'Bin',
     caption: '',
     icon: 'delete',
     to: {
-      name: 'trash',
+      name: 'bookmarks-bin',
     },
   },
 ];
