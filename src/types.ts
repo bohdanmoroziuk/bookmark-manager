@@ -1,3 +1,8 @@
+export interface Breadcrumb {
+  label: string;
+  name: string;
+}
+
 export interface Bookmark {
   id: string;
   title: string;

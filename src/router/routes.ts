@@ -8,16 +8,34 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'all-bookmarks',
+        meta: {
+          breadcrumb: {
+            label: 'All bookmarks',
+            name: 'all-bookmarks',
+          },
+        },
         component: () => import('src/pages/AllBookmarksPage.vue'),
       },
       {
         path: 'new',
         name: 'new-bookmark',
+        meta: {
+          breadcrumb: {
+            label: 'New bookmark',
+            name: 'new-bookmark',
+          },
+        },
         component: () => import('src/pages/NewBookmarkPage.vue'),
       },
       {
         path: 'bin',
         name: 'bookmarks-bin',
+        meta: {
+          breadcrumb: {
+            label: 'Bin',
+            name: 'bookmarks-bin',
+          },
+        },
         component: () => import('src/pages/BookmarksBinPage.vue'),
       },
       {

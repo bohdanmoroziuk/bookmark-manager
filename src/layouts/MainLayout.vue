@@ -5,12 +5,14 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
+        <q-toolbar-title shrink>
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
           </q-avatar>
           Bookmark Manager
         </q-toolbar-title>
+
+        <breadcrumb-list />
       </q-toolbar>
     </q-header>
 
@@ -46,6 +48,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
+import { BreadcrumbList } from 'src/components';
 
 const leftDrawerOpen = ref(false);
 
