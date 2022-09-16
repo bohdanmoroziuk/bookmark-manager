@@ -12,7 +12,13 @@
           <q-icon name="search" />
         </template>
       </q-input>
-      <q-btn color="primary" icon="add" unelevated label="Add" />
+      <q-btn
+        :to="{ name: 'new' }"
+        color="primary"
+        icon="add"
+        label="Add"
+        unelevated
+      />
     </div>
     <bookmark-list
       :bookmarks="bookmarks"

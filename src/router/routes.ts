@@ -11,6 +11,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/IndexPage.vue'),
       },
       {
+        path: 'new',
+        name: 'new',
+        component: () => import('src/pages/NewBookmarkPage.vue'),
+      },
+      {
         path: 'trash',
         name: 'trash',
         component: () => import('pages/TrashPage.vue'),
