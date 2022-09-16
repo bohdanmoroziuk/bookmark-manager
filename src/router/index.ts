@@ -1,4 +1,5 @@
 import { route } from 'quasar/wrappers';
+import { LoadingBar } from 'quasar';
 import {
   createMemoryHistory,
   createRouter,
@@ -24,7 +25,7 @@ export default route((/* { store, ssrContext } */) => {
       ? createWebHistory
       : createWebHashHistory;
 
-  const Router = createRouter({
+  const router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
 
@@ -34,5 +35,13 @@ export default route((/* { store, ssrContext } */) => {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  return Router;
+  router.beforeEach(() => {
+    LoadingBar.start();
+  });
+
+  router.afterEach(() => {
+    LoadingBar.stop();
+  });
+
+  return router;
 });
