@@ -39,7 +39,11 @@
 
     <q-page-container>
       <q-page class="q-pa-md">
-        <router-view />
+        <router-view v-slot="{ Component, route }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" :key="route.name" />
+          </transition>
+        </router-view>
       </q-page>
     </q-page-container>
 
@@ -84,3 +88,15 @@ const links = [
   },
 ];
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
