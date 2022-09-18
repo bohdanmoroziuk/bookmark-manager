@@ -13,6 +13,8 @@ defineProps<Props>();
 
 const emit = defineEmits<Emits>();
 
+const fallbackImage = 'https://cdn.quasar.dev/logo-v2/svg/logo.svg';
+
 const handleDelete = (id: string) => {
   emit('delete', id);
 };
@@ -25,12 +27,20 @@ const handleDelete = (id: string) => {
       :key="bookmark.id"
     >
       <q-item-section avatar>
-        <img :src="bookmark.image" />
+        <img :src="bookmark.image || fallbackImage" :alt="bookmark.title" />
       </q-item-section>
 
       <q-item-section>
         <q-item-label>{{ bookmark.title }}</q-item-label>
-        <q-item-label caption>{{ bookmark.caption }}</q-item-label>
+        <q-item-label caption v-if="bookmark.caption">{{ bookmark.caption }}</q-item-label>
+        <a
+          class="text-primary"
+          :href="bookmark.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ bookmark.url }}
+        </a>
       </q-item-section>
 
       <q-item-section side>

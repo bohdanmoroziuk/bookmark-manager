@@ -100,6 +100,13 @@ module.exports = configure((/* ctx */) => ({
   // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
   framework: {
     config: {
+      notify: {
+        position: 'top-right',
+        multiLine: true,
+        actions: [
+          { label: 'Dismiss', color: 'white' },
+        ],
+      },
       loadingBar: {},
     },
 
@@ -115,6 +122,7 @@ module.exports = configure((/* ctx */) => ({
 
     // Quasar plugins
     plugins: [
+      'Notify',
       'LoadingBar',
     ],
   },
