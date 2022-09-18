@@ -1,6 +1,7 @@
 import { store } from 'quasar/wrappers';
-import { createPinia } from 'pinia';
 import { Router } from 'vue-router';
+import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 export * from 'src/stores/bookmarks';
 
@@ -29,6 +30,8 @@ export default store((/* { ssrContext } */) => {
 
   // You can add Pinia plugins here
   // pinia.use(SomePiniaPlugin)
+
+  pinia.use(piniaPluginPersistedstate);
 
   return pinia;
 });

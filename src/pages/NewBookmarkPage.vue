@@ -1,76 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
 
 import { BookmarkBody } from 'src/types';
+import { useBookmarksStore } from 'src/stores';
+import { BookmarkForm } from 'src/components';
 
-interface Emits {
-  (event: 'submit', payload: BookmarkBody): void;
-}
+const $q = useQuasar();
 
-const emit = defineEmits<Emits>();
+const $router = useRouter();
 
-const formData = ref<BookmarkBody>({
-  title: '',
-  caption: '',
-  image: '',
-  url: '',
-});
+const bookmarksStore = useBookmarksStore();
 
-const handleSubmit = () => {
-  emit('submit', formData.value);
-};
+const addBookmark = async (body: BookmarkBody) => {
+  try {
+    $q.loadingBar.start();
 
-const handleReset = () => {
-  formData.value = {
-    title: '',
-    caption: '',
-    image: '',
-    url: '',
-  };
+    bookmarksStore.addBookmark(body);
+
+    $q.notify({ type: 'positive', message: 'A new bookmark has been added.' });
+    await $router.push({ name: 'all-bookmarks' });
+  } catch (error) {
+    $q.notify({ type: 'negative', message: (error as Error).message });
+  } finally {
+    $q.loadingBar.stop();
+  }
 };
 </script>
 
 <template>
   <div class="new-bookmark-page">
-    <div style="max-width: 400px;">
-      <q-form
-        @submit="handleSubmit"
-        @reset="handleReset"
-        class="q-gutter-md"
-      >
-        <q-input
-          dense
-          outlined
-          v-model="formData.title"
-          label="Title"
-        />
-
-        <q-input
-          dense
-          outlined
-          v-model="formData.caption"
-          label="Caption"
-        />
-
-        <q-input
-          dense
-          outlined
-          v-model="formData.image"
-          label="Image"
-        />
-
-        <q-input
-          dense
-          outlined
-          v-model="formData.url"
-          label="Url"
-        />
-
-        <div>
-          <q-btn label="Submit" type="submit" color="primary"/>
-          <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-        </div>
-      </q-form>
-    </div>
+    <bookmark-form @submit="addBookmark" />
   </div>
 </template>
