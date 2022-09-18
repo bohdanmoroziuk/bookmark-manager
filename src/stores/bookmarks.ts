@@ -13,6 +13,7 @@ const createBookmark = (body: BookmarkBody): Bookmark => ({
 });
 
 export const useBookmarksStore = defineStore('bookmarks', {
+  persist: true,
   state: (): BookmarksStoreState => ({
     bookmarks: [],
   }),
